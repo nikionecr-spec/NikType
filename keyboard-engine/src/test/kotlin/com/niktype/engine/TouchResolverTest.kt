@@ -40,11 +40,11 @@ class TouchResolverTest {
     fun gapTouchReturnsAdjacentKeys() {
         val layout = buildLayout()
         val c = layout.charToKey['c']!!
-        val d = layout.charToKey['d']!!
-        val gapX = (c.right + d.x) / 2f
+        val v = layout.charToKey['v']!! // همسایه افقی واقعی c در QWERTY
+        val gapX = (c.right + v.x) / 2f
         val cands = resolver().resolve(gapX, c.centerY, layout)
         val ids = cands.take(2).map { it.rect.key.id }
-        assertTrue("c and d must dominate at shared edge", ids.contains("c") && ids.contains("d"))
+        assertTrue("c and v must dominate at shared edge", ids.contains("c") && ids.contains("v"))
     }
 
     @Test
@@ -58,13 +58,14 @@ class TouchResolverTest {
     fun fastTypingIncreasesTolerance() {
         val layout = buildLayout()
         val g = layout.charToKey['g']!!
-        // لمس کمی جابه‌جا از مرکز
+        // لمس جابه‌جاشده از مرکز؛ با تایپ سریع باید کاندیدهای جایگزین غنی‌تر شوند
         val x = g.centerX + g.width * 0.22f
         val slow = resolver().resolve(x, g.centerY, layout, speedCps = 0f)
         val fast = resolver().resolve(x, g.centerY, layout, speedCps = 8f)
-        val slowP = slow.firstOrNull { it.rect.key.id == "g" }?.probability ?: 0f
-        val fastP = fast.firstOrNull { it.rect.key.id == "g" }?.probability ?: 0f
-        assertTrue("fast typing should be more tolerant", fastP >= slowP)
+        assertEquals("correct key still wins", "g", fast[0].rect.key.id)
+        val slowSecond = slow.getOrNull(1)?.probability ?: 0f
+        val fastSecond = fast.getOrNull(1)?.probability ?: 0f
+        assertTrue("fast typing should surface richer alternatives", fastSecond > slowSecond)
     }
 
     @Test
@@ -85,9 +86,10 @@ class TouchResolverTest {
         val x = g.centerX + g.width * 0.22f
         val small = resolver(FingerProfiles.SMALL_PROFILE).resolve(x, g.centerY, layout)
         val large = resolver(FingerProfiles.LARGE_PROFILE).resolve(x, g.centerY, layout)
-        val smallP = small.firstOrNull { it.rect.key.id == "g" }?.probability ?: 0f
-        val largeP = large.firstOrNull { it.rect.key.id == "g" }?.probability ?: 0f
-        assertTrue("large profile must accept sloppy touches more", largeP > smallP)
+        assertEquals("g", large[0].rect.key.id)
+        val smallSecond = small.getOrNull(1)?.probability ?: 0f
+        val largeSecond = large.getOrNull(1)?.probability ?: 0f
+        assertTrue("large profile must yield richer alternatives for sloppy touches", largeSecond > smallSecond)
     }
 
     @Test

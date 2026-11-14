@@ -204,7 +204,7 @@ class KeyboardController(
     }
 
     fun onEditorInfo(info: EditorInfo) {
-        val cls = info.inputType and InputType.TYPE_CLASS_MASK
+        val cls = info.inputType and InputType.TYPE_MASK_CLASS
         val variation = info.inputType and InputType.TYPE_MASK_VARIATION
         isPasswordField = (cls == InputType.TYPE_CLASS_TEXT && (
             variation == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
@@ -223,7 +223,7 @@ class KeyboardController(
     // -------------------------------------------------- haptic & sound --
 
     private fun haptic() {
-        if (!settings.vibration || settings.hapticStrength <= 0) return
+        if (settings.hapticStrength <= 0) return
         val amp = (settings.hapticStrength * 2.55f).toInt().coerceIn(1, 255)
         runCatching { vibrator?.vibrate(VibrationEffect.createOneShot(18, amp)) }
     }

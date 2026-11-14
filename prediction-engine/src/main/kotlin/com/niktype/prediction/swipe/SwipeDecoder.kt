@@ -50,8 +50,8 @@ class SwipeDecoder {
         for (c in hits) if (seq.isEmpty() || seq.last() != c) seq.add(c)
         if (seq.size < 3 || seq.first() == seq.last()) return emptyList()
 
-        val firstNorm = TextNormalizerCompat(seq.first(), lang)
-        val lastNorm = TextNormalizerCompat(seq.last(), lang)
+        val firstNorm = TextNormalizerCompat(seq.first().toString(), lang)
+        val lastNorm = TextNormalizerCompat(seq.last().toString(), lang)
         if (firstNorm.isEmpty() || lastNorm.isEmpty()) return emptyList()
 
         val candidates = dict.wordsStartingWith(firstNorm[0], 300)

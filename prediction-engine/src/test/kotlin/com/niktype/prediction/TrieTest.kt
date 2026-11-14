@@ -40,8 +40,9 @@ class TrieTest {
     @Test
     fun fuzzyWithinRadius() {
         val t = build()
-        val matches = t.fuzzy("سالم", 1, 10)
-        assertTrue(matches.any { it.entry.word == "سلام" && it.distance == 1 })
+        // جابه‌جایی حروف مجاور در لونشتاین ساده فاصله ۲ دارد
+        val matches = t.fuzzy("سالم", 2, 10)
+        assertTrue(matches.any { it.entry.word == "سلام" && it.distance == 2 })
         val none = t.fuzzy("زززز", 1, 10)
         assertTrue(none.isEmpty() || none.all { it.distance <= 1 })
     }

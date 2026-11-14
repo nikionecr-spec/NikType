@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -427,7 +428,9 @@ fun TypingScreen(container: AppContainer, onBack: () -> Unit) {
 
         Card {
             SwitchRow(stringResource(R.string.s_sound), settings.soundEnabled) { v -> update { it.copy(soundEnabled = v) } }
-            SwitchRow(stringResource(R.string.s_vibration), settings.vibration) { v -> update { it.copy(hapticStrength = if (v) (if (it.hapticStrength == 0) 35 else it.hapticStrength) else 0) } }
+            SwitchRow(stringResource(R.string.s_vibration), settings.hapticStrength > 0) { v ->
+                update { it.copy(hapticStrength = if (v) (if (it.hapticStrength == 0) 35 else it.hapticStrength) else 0) }
+            }
             if (settings.hapticStrength > 0) {
                 SliderRow(
                     stringResource(R.string.s_haptic_strength), settings.hapticStrength.toFloat(),

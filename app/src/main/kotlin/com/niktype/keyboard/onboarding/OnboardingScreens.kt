@@ -3,6 +3,7 @@ package com.niktype.keyboard.onboarding
 import android.content.Intent
 import android.provider.Settings
 import android.view.inputmethod.InputMethodManager
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -52,6 +53,7 @@ import kotlinx.coroutines.launch
 /**
  * راه‌اندازی مرحله‌ای شش‌گانه NikType.
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnboardingFlow(container: AppContainer) {
     val pagerState = rememberPagerState(pageCount = { 6 })

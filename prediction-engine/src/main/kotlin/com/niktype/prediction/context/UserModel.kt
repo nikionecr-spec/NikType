@@ -51,6 +51,9 @@ class UserModel(private val cap: Int = 25000) {
     fun displayFor(raw: String, lang: com.niktype.engine.geometry.LanguageMode): String? =
         words[TextNormalizer.normalize(raw, lang)]?.display
 
+    fun contains(raw: String, lang: com.niktype.engine.geometry.LanguageMode): Boolean =
+        words.containsKey(TextNormalizer.normalize(raw, lang))
+
     fun size(): Int = words.size
 
     fun toLines(): List<String> = words.map { (k, e) -> "$k\t${e.display}\t${e.count}" }

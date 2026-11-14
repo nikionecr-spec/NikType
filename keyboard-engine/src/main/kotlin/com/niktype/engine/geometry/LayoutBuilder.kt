@@ -85,7 +85,7 @@ class LayoutBuilder {
         listOf(
             faKey("ظ"), faKey("ط"), faKey("ز"), faKey("ر"), faKey("ذ"),
             faKey("د"), faKey("پ"), faKey("و", alts = listOf("ؤ")), faKey("ژ"),
-            faKey("؟", output = "؟"),
+            KeySpec(id = "؟", label = "؟", output = "؟"),
             backspaceKey(1.5f),
         ),
     )

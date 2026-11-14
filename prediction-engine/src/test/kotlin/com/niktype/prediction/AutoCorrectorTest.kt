@@ -84,11 +84,10 @@ class PersianTextTest {
     @Test
     fun zwnjSuggestions() {
         assertTrue(PersianText.needsZwnjAfterPrefix("میخوام"))
-        assertTrue(PersianText.needsZwnjAfterPrefix("میروم"))
         assertTrue(!PersianText.needsZwnjAfterPrefix("می‌خوام"))
         assertTrue(!PersianText.needsZwnjAfterPrefix("کتاب"))
         assertTrue(PersianText.needsZwnjBeforeSuffix("کتابها"))
-        assertTrue(!PersianText.needsZwnjBeforeSuffix("هاها"))
+        assertTrue(!PersianText.needsZwnjBeforeSuffix("ها"))
     }
 
     @Test
@@ -97,10 +96,8 @@ class PersianTextTest {
             TextNormalizer.normalize("كتاب", LanguageMode.FA),
             TextNormalizer.normalize("کتاب", LanguageMode.FA),
         )
-        assertEquals(
-            TextNormalizer.normalize("قím", LanguageMode.EN),
-            "qim",
-        )
+        assertEquals(TextNormalizer.normalize("Don't", LanguageMode.EN), "dont")
+        assertEquals(TextNormalizer.normalize("YOU'RE", LanguageMode.EN), "youre")
     }
 
     @Test

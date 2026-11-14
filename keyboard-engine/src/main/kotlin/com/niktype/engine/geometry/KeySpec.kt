@@ -56,7 +56,7 @@ data class KeyboardLayout(
     val keys: List<KeyRect>,
 ) {
     val charToKey: Map<Char, KeyRect> = buildMap {
-        for (kr in keys) {
+        for (kr in this@KeyboardLayout.keys) {
             val out = kr.key.output
             if (kr.key.type == KeyType.CHAR && out != null && out.length == 1) {
                 put(out[0], kr)

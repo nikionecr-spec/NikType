@@ -14,6 +14,7 @@ import com.niktype.prediction.suggest.SuggestionEngine
 import com.niktype.prediction.swipe.SwipeCandidate
 import com.niktype.prediction.swipe.SwipeDecoder
 import com.niktype.prediction.text.TextNormalizer
+import com.niktype.prediction.data.WordData
 
 /**
  * نما (Facade) موتور پیش‌بینی — تنها نقطه اتصال لایه اپلیکیشن.
@@ -50,7 +51,7 @@ class PredictionEngine(
         corrector.correct(raw, lang, charAlts)
 
     fun isKnown(raw: String, lang: LanguageMode): Boolean =
-        dictFor(lang).lookup(raw) != null
+        dictFor(lang).lookup(raw) != null || user.contains(raw, lang)
 
     fun learn(rawWord: String, prevWord: String?, lang: LanguageMode) {
         val norm = TextNormalizer.normalize(rawWord, lang)

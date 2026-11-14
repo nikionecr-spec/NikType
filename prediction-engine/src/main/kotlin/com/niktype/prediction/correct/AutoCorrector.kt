@@ -26,9 +26,10 @@ data class CorrectConfig(
  * 2) واژه‌های کوتاه‌تر از ۳ نویسه اصلاح نمی‌شوند.
  * 3) واژه‌های دارای رقم یا شبیه نام خاص اصلاح نمی‌شوند.
  * 4) جایگزینی با فاصله ۲ فقط برای واژه‌های خیلی پرتکرار مجاز است.
- * 5) اگر نویسه‌ی جایگزین از میان کاندیداهای لمسیِ همان موقعیت نیامده،
- *    فقط با فاصله ۱ پذیرفته می‌شود.
- * 6) بسامد واژه جایگزین باید از حد آستانه بالاتر باشد.
+ * 5) جایگزینی نویسه‌ای که از کاندیدهای لمسی همان موقعیت نیامده، جریمه
+ *    امتیاز می‌گیرد (0.35×) تا اولویت با جایگزین‌های لمسی باشد.
+ * 6) جابه‌جایی حروف مجاور (teh→the) به‌عنوان رایج‌ترین غلط تایپ با
+ *    فاصله ۱ در نظر گرفته می‌شود.
  */
 class AutoCorrector(
     private val faDict: LanguageDictionary,
@@ -50,39 +51,63 @@ class AutoCorrector(
         val dict = if (language == LanguageMode.FA) faDict else enDict
         if (dict.lookup(norm) != null) return null
 
-        val candidates = dict.fuzzy(norm, config.maxDistance, 12)
-        if (candidates.isEmpty()) return null
-
-        var best: FuzzyMatch? = null
+        // امتیاز هر کاندید: freq × factor / (1 + d²)
+        var bestFreq = -1
+        var bestWord: String? = null
         var bestScore = -1f
-        for (c in candidates) {
+        var bestDistance = 99
+
+        // ۱) نامزدهای فازی دیکشنری
+        for (c in dict.fuzzy(norm, config.maxDistance, 12)) {
             if (c.entry.freq < config.minFreq) continue
             if (c.distance >= config.maxDistance && c.entry.freq < config.veryFreq) continue
 
             var factor = 1f
-            var reject = false
             for (i in 0 until minOf(c.entry.word.length, norm.length)) {
                 if (c.entry.word[i] != norm[i]) {
                     val hasTouchAlt = charAlts.getOrNull(i)?.contains(c.entry.word[i]) == true
-                    if (!hasTouchAlt) {
-                        factor *= 0.35f
-                        if (c.distance > 1) { reject = true; break }
-                    }
+                    if (!hasTouchAlt) factor *= 0.35f
                 }
             }
-            if (reject) continue
-
             val score = c.entry.freq * factor / (1f + c.distance * c.distance)
-            if (score > bestScore) { bestScore = score; best = c }
+            if (score > bestScore) {
+                bestScore = score
+                bestFreq = c.entry.freq
+                bestWord = c.entry.word
+                bestDistance = c.distance
+            }
         }
 
-        val b = best ?: return null
-        val display = dict.displayFor(b.entry.word) ?: b.entry.word
+        // ۲) جابه‌جایی حروف مجاور — رایج‌ترین خطای تایپ سریع
+        for (i in 0 until norm.length - 1) {
+            val swapped = swapAt(norm, i)
+            if (swapped == norm) continue
+            val entry = dict.lookup(swapped) ?: continue
+            if (entry.freq < config.minFreq) continue
+            val score = entry.freq / 2f
+            if (score > bestScore) {
+                bestScore = score
+                bestFreq = entry.freq
+                bestWord = entry.word
+                bestDistance = 1
+            }
+        }
+
+        val word = bestWord ?: return null
+        val display = dict.displayFor(word) ?: word
         if (display == raw) return null
 
-        val confidence = ((b.entry.freq / 2000f).coerceIn(0.5f, 1f)) *
-            (if (b.distance == 1) 1f else 0.8f)
+        val confidence = ((bestFreq / 2000f).coerceIn(0.5f, 1f)) *
+            (if (bestDistance == 1) 1f else 0.8f)
         return Correction(raw, display, confidence)
+    }
+
+    private fun swapAt(s: String, i: Int): String {
+        val sb = StringBuilder(s)
+        val tmp = sb[i]
+        sb[i] = sb[i + 1]
+        sb[i + 1] = tmp
+        return sb.toString()
     }
 
     private fun looksLikeProperNoun(raw: String, language: LanguageMode): Boolean = when (language) {

@@ -77,9 +77,9 @@ fun KeyboardCanvas(
                         for (change in event.changes) {
                             val pos = change.position
                             when {
-                                change.changedToDown ->
+                                change.changedToDown() ->
                                     controller.onDown(change.id.value, pos.x, pos.y, change.uptimeMillis)
-                                change.changedToUp ->
+                                change.changedToUp() ->
                                     controller.onUp(change.id.value, pos.x, pos.y, change.uptimeMillis)
                                 change.pressed && change.positionChanged() ->
                                     controller.onMove(change.id.value, pos.x, pos.y, change.uptimeMillis)
