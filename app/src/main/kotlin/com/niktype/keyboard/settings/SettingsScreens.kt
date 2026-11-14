@@ -555,7 +555,7 @@ fun AboutScreen(container: AppContainer, onBack: () -> Unit) {
         Card {
             Text("${stringResource(R.string.s_version)} 0.1.0", color = Color(0xFFE4E4EF), fontSize = 14.sp)
             Spacer(Modifier.height(6.dp))
-            Text("${stringResource(R.string.s_repo)}: github.com (NikType)", color = Color(0xFF9C7BFF), fontSize = 14.sp)
+            Text("${stringResource(R.string.s_repo)}: github.com/nikionecr-spec/NikType", color = Color(0xFF9C7BFF), fontSize = 14.sp)
         }
     }
 }
