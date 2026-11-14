@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NikType</string>
+    <string name="ime_name">کیبورد NikType</string>
+    <string name="subtype_fa">فارسی</string>
+    <string name="subtype_en">English</string>
+
+    <!-- Onboarding -->
+    <string name="ob_step">مرحله %1$d از ۶</string>
+    <string name="ob_welcome_title">به NikType خوش آمدید</string>
+    <string name="ob_welcome_desc">کیبورد هوشمند، سریع و روان فارسی و انگلیسی — طراحی‌شده برای انگشت‌های درشت.\n\n• تشخیص هوشمند لمس و اصلاح خودکار\n• پیشنهاد کلمات و تایپ کشیدنی\n• کاملاً آفلاین و بدون ارسال داده</string>
+    <string name="ob_lang_title">انتخاب زبان‌ها</string>
+    <string name="ob_lang_desc">NikType هم‌زمان از فارسی و انگلیسی پشتیبانی می‌کند. با کلید زبان در نوار پیشنهاد می‌توانید هر لحظه جابه‌جا شوید.</string>
+    <string name="ob_finger_title">اندازه انگشت شما؟</string>
+    <string name="ob_finger_desc">این تنظیم، اندازه کلیدها و حساسیت موتور تشخیص لمس را برای دست شما بهینه می‌کند. بعداً هم قابل تغییر است.</string>
+    <string name="ob_size_title">اندازه کیبورد</string>
+    <string name="ob_size_desc">ارتفاع و فاصله کلیدها را تنظیم کنید تا تایپ برایتان راحت‌تر شود.</string>
+    <string name="ob_enable_title">فعال‌سازی کیبورد</string>
+    <string name="ob_enable_desc">NikType باید در تنظیمات اندروید فعال شود. روی دکمه زیر بزنید و در فهرست «کیبوردهای فعال» گزینه NikType را روشن کنید.</string>
+    <string name="ob_enable_action">رفتن به تنظیمات سیستم</string>
+    <string name="ob_enable_done">کیبورد فعال شد ✔</string>
+    <string name="ob_default_title">انتخاب NikType به‌عنوان کیبورد پیش‌فرض</string>
+    <string name="ob_default_desc">در پنجره بعدی، NikType را از فهرست انتخاب کنید تا همه‌جا از آن استفاده کنید.</string>
+    <string name="ob_default_action">انتخاب کیبورد پیش‌فرض</string>
+    <string name="ob_default_done">NikType پیش‌فرض شد ✔</string>
+    <string name="ob_finish">شروع تایپ</string>
+    <string name="ob_next">بعدی</string>
+    <string name="ob_skip">رد کردن</string>
+
+    <!-- Profiles -->
+    <string name="profile_small">انگشت‌های کوچک</string>
+    <string name="profile_normal">انگشت‌های معمولی</string>
+    <string name="profile_large">انگشت‌های درشت</string>
+
+    <!-- Settings -->
+    <string name="settings_title">تنظیمات NikType</string>
+    <string name="s_appearance">ظاهر و تم</string>
+    <string name="s_typing">تایپ و هوشمندی</string>
+    <string name="s_shortcuts">میانبرهای متنی</string>
+    <string name="s_about">درباره و حریم خصوصی</string>
+    <string name="s_profiles">پروفایل انگشت</string>
+    <string name="s_theme">تم</string>
+    <string name="s_key_height">ارتفاع کلیدها</string>
+    <string name="s_key_gap">فاصله میان کلیدها</string>
+    <string name="s_corner">گردی گوشه‌ها</string>
+    <string name="s_font_size">اندازه فونت</string>
+    <string name="s_keyboard_height">ارتفاع کلی کیبورد</string>
+    <string name="s_transparency">شفافیت پس‌زمینه</string>
+    <string name="s_key_color">رنگ کلیدها</string>
+    <string name="s_bg_color">رنگ پس‌زمینه</string>
+    <string name="s_animation">انیمیشن</string>
+    <string name="s_anim_none">بدون انیمیشن</string>
+    <string name="s_anim_standard">استاندارد</string>
+    <string name="s_anim_playful">شاد و فنری</string>
+    <string name="s_autocorrect">اصلاح خودکار</string>
+    <string name="s_next_word">پیش‌بینی کلمه بعدی</string>
+    <string name="s_swipe">تایپ کشیدنی (سوایپ)</string>
+    <string name="s_sound">صدای کلیدها</string>
+    <string name="s_vibration">لرزش هنگام لمس</string>
+    <string name="s_haptic_strength">شدت لرزش</string>
+    <string name="s_persian_digits">اعداد فارسی</string>
+    <string name="s_auto_caps">حرف بزرگ خودکار (انگلیسی)</string>
+    <string name="s_colloquial">یادگیری واژه‌های محاوره‌ای</string>
+    <string name="s_fa_layout">چیدمان حروف فارسی</string>
+    <string name="s_fa_layout_standard">استاندارد (ض ص ث ق …)</string>
+    <string name="s_fa_layout_alpha">الفبایی (ا ب پ ت …)</string>
+    <string name="s_default_color">پیش‌فرض تم</string>
+    <string name="s_add_shortcut">افزودن میانبر</string>
+    <string name="s_shortcut_hint">مثلاً تایپ «سخ» به‌جای «صبح بخیر»؟</string>
+    <string name="s_shortcut_key">عبارت کوتاه</string>
+    <string name="s_shortcut_value">متن کامل</string>
+    <string name="s_delete">حذف</string>
+    <string name="s_shortcuts_empty">هیچ میانبری ثبت نشده است.</string>
+    <string name="s_about_privacy_title">حریم خصوصی</string>
+    <string name="s_about_privacy_body">NikType هیچ داده‌ای به اینترنت ارسال نمی‌کند — حتی دسترسی اینترنت ندارد. یادگیری کلمات و کالیبراسیون لمس فقط روی دستگاه ذخیره می‌شود، در فیلدهای رمز عبور هیچ چیزی ذخیره یا پردازش نمی‌شود و هیچ تبلیغ یا ردیابی وجود ندارد.</string>
+    <string name="s_version">نسخه</string>
+    <string name="s_repo">مخزن کد</string>
+
+    <!-- Keyboard -->
+    <string name="lang_fa_short">فا</string>
+    <string name="lang_en_short">EN</string>
+    <string name="zwnj_chip">نیم‌فاصله</string>
+    <string name="paste">چسباندن</string>
+    <string name="voice_listen">در حال شنیدن…</string>
+    <string name="voice_failed">تشخیص صوت در دسترس نیست</string>
+    <string name="voice_no_permission">برای تایپ صوتی، اجازه میکروفون لازم است</string>
+    <string name="enable_first">ابتدا NikType را در تنظیمات فعال کنید</string>
+    <string name="theme_dark_neon">Dark Neon</string>
+    <string name="theme_purple_galaxy">Purple Galaxy</string>
+    <string name="theme_ocean_blue">Ocean Blue</string>
+    <string name="theme_minimal_black">Minimal Black</string>
+    <string name="theme_pure_white">Pure White</string>
+    <string name="theme_glass_ui">Glass UI</string>
+    <string name="back">بازگشت</string>
+    <string name="save">ذخیره</string>
+    <string name="cancel">انصراف</string>
+</resources>
