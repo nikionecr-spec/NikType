@@ -1,2 +1,28 @@
-skills/
-node_modules/
+# Gradle
+.gradle/
+build/
+local.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Android
+captures/
+.cxx/
+.externalNativeBuild/
+
+# Signing keys — never commit these
+*.jks
+*.keystore
+keystore.properties
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
